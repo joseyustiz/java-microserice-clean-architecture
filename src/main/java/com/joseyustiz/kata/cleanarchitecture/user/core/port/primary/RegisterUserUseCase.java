@@ -1,4 +1,4 @@
-package com.joseyustiz.kata.cleanarchitecture.user.port.primary;
+package com.joseyustiz.kata.cleanarchitecture.user.core.port.primary;
 
 import com.joseyustiz.kata.cleanarchitecture.user.core.domain.*;
 import lombok.Builder;

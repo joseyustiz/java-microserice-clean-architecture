@@ -3,7 +3,7 @@ package com.joseyustiz.kata.cleanarchitecture.user.core;
 import com.joseyustiz.kata.cleanarchitecture.user.core.domain.*;
 import com.joseyustiz.kata.cleanarchitecture.user.core.port.secondary.GetUserPort;
 import com.joseyustiz.kata.cleanarchitecture.user.core.port.secondary.RegisterUserPort;
-import com.joseyustiz.kata.cleanarchitecture.user.port.primary.RegisterUserUseCase;
+import com.joseyustiz.kata.cleanarchitecture.user.core.port.primary.RegisterUserUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -61,7 +61,7 @@ public class SignUpUserServiceTest {
         Mockito.when(getUserPort.findByUserName(any(UserName.class))).thenReturn(Optional.of(user));
 
         //expect
-        UserNameIsUsedConstraintException e = Assertions.assertThrows(UserNameIsUsedConstraintException.class, () -> userCase.handle(command));
+        UserNameUsedConstraintException e = Assertions.assertThrows(UserNameUsedConstraintException.class, () -> userCase.handle(command));
 
         //then
         assertThat(e.getMessage()).isEqualTo("userName is already used by another user");

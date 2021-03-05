@@ -1,10 +1,10 @@
 package com.joseyustiz.kata.cleanarchitecture.user.core;
 
 import com.joseyustiz.kata.cleanarchitecture.user.core.domain.User;
-import com.joseyustiz.kata.cleanarchitecture.user.core.domain.UserNameIsUsedConstraintException;
+import com.joseyustiz.kata.cleanarchitecture.user.core.domain.UserNameUsedConstraintException;
 import com.joseyustiz.kata.cleanarchitecture.user.core.port.secondary.GetUserPort;
 import com.joseyustiz.kata.cleanarchitecture.user.core.port.secondary.RegisterUserPort;
-import com.joseyustiz.kata.cleanarchitecture.user.port.primary.RegisterUserUseCase;
+import com.joseyustiz.kata.cleanarchitecture.user.core.port.primary.RegisterUserUseCase;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
@@ -17,7 +17,7 @@ public class RegisterUserService implements RegisterUserUseCase {
     @Override
     public void handle(@NonNull RegisterUserCommand command) {
         Optional<User> user = getUserPort.findByUserName(command.getUserName());
-        user.ifPresent(u ->{throw new UserNameIsUsedConstraintException(String.format("%s is already used by another user",
+        user.ifPresent(u ->{throw new UserNameUsedConstraintException(String.format("%s is already used by another user",
                 u.getUserName().getValue()), u.getUserName());});
 
         registerUserPort.register(User.builder()
