@@ -35,7 +35,7 @@ public class RegisterUserControllerTest {
     @Test
     void invalidParameter_return400() throws Exception {
         RegisterUserController.RegisterUserRequest request = RegisterUserController.RegisterUserRequest.builder().build();
-        mockMvc.perform(post("/user/signup")
+        mockMvc.perform(post("/users")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(objectMapper.writeValueAsBytes(request)))
                 .andExpect(status().is(400));
@@ -52,7 +52,7 @@ public class RegisterUserControllerTest {
                 .email("email@example.com").password("P@ssw0rd.1")
                 .build();
 
-        mockMvc.perform(post("/user/signup")
+        mockMvc.perform(post("/users")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(objectMapper.writeValueAsBytes(request)))
                 .andExpect(status().is(400));
@@ -66,7 +66,7 @@ public class RegisterUserControllerTest {
                 .email("email@example.com").password("P@ssw0rd.1")
                 .build();
 
-        mockMvc.perform(post("/user/signup")
+        mockMvc.perform(post("/users")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(objectMapper.writeValueAsBytes(request)))
                 .andExpect(status().is(201));
